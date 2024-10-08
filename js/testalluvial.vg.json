@@ -1,0 +1,133 @@
+{
+  "$schema": "https://vega.github.io/schema/vega/v5.json",
+  "width": 400,
+  "height": 400,
+  "signals": [
+    { "name": "year", "value": 2021, "bind": {"input": "select", "options": [2021, 2022, 2023]} },
+    { "name": "originX", "value": 0 },
+    { "name": "originY", "value": 0 },
+    { "name": "inner_radius", "value": 270 },
+    { "name": "outer_radius", "value": 290 }
+  ],
+  "data": [
+    {
+      "name": "arcs",
+      "values": [
+        { "category": "A", "startAngle": 0, "endAngle": 1.5, "value": 30, "color": "#1f77b4" },  
+        { "category": "B", "startAngle": 1.6, "endAngle": 2.8, "value": 20, "color": "#ff7f0e" }, 
+        { "category": "C", "startAngle": 3, "endAngle": 5, "value": 40, "color": "#2ca02c" },    
+        { "category": "D", "startAngle": 5.2, "endAngle": 6.2, "value": 40, "color": "#d62728" } 
+      ]
+    },
+    {
+      "name": "connections",
+      "values": [
+        { "source": "A", "target": "B", "value": 3, "sourceStartAngle": 0, "sourceEndAngle": 1.5, "targetStartAngle": 1.6, "targetEndAngle": 2.8 },
+        { "source": "A", "target": "C", "value": 4, "sourceStartAngle": 0, "sourceEndAngle": 1.5, "targetStartAngle": 3, "targetEndAngle": 5 },
+        { "source": "A", "target": "D", "value": 5, "sourceStartAngle": 0, "sourceEndAngle": 1.5, "targetStartAngle": 5.2, "targetEndAngle": 6.2 }
+      ],
+      "transform": [
+        {
+          "type": "formula",
+          "expr": "(datum.sourceStartAngle + datum.sourceEndAngle) / 2",
+          "as": "sourceAngle"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.targetStartAngle + datum.targetEndAngle) / 2",
+          "as": "targetAngle"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * cos(datum.sourceAngle)",
+          "as": "x1"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * sin(datum.sourceAngle)",
+          "as": "y1"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * cos(datum.targetAngle)",
+          "as": "x2"
+        },
+        {
+          "type": "formula",
+          "expr": "inner_radius * sin(datum.targetAngle)",
+          "as": "y2"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.x1 + datum.x2) / 2",
+          "as": "midX"
+        },
+        {
+          "type": "formula",
+          "expr": "(datum.y1 + datum.y2) / 2 - 50", 
+          "as": "midY"
+        },
+        {
+          "type": "formula",
+          "expr": "'M' + datum.x1 + ',' + datum.y1 + ' Q' + datum.midX + ',' + datum.midY + ' ' + datum.x2 + ',' + datum.y2",
+          "as": "path"
+        }
+      ]
+    }
+  ],
+  "marks": [
+    {
+      "type": "arc",
+      "from": { "data": "arcs" },
+      "encode": {
+        "enter": {
+          "fill": { "field": "color" }, 
+          "x": { "signal": "0 * width/2" },
+          "y": { "signal": "0 * height/2" }
+        },
+        "update": {
+          "startAngle": { "field": "startAngle" },
+          "endAngle": { "field": "endAngle" },
+          "padAngle": { "value": 0 },
+          "innerRadius": { "signal": "inner_radius" },
+          "outerRadius": { "signal": "outer_radius" },
+          "tooltip": { "signal": "'Category: ' + datum.category + ', Value: ' + datum.value" }
+        }
+      }
+    },
+    {
+      "type": "text",
+      "from": { "data": "arcs" },
+      "encode": {
+        "enter": {
+          "text": { "signal": "'Category ' + datum.category" }
+        },
+        "update": {
+          "x": {
+            "signal": "originX + (outer_radius + 20) * cos((datum.startAngle + datum.endAngle) / 2)"
+          },
+          "y": {
+            "signal": "originY + (outer_radius + 20) * sin((datum.startAngle + datum.endAngle) / 2)"
+          },
+          "align": { "value": "center" }
+        }
+      }
+    },
+    {
+      "type": "path",
+      "from": { "data": "connections" },
+      "encode": {
+        "enter": {
+          "opacity": { "value": 0.8 },
+          "stroke": { "value": "black" },
+          "fill": { "value": null }  
+        },
+        "update": {
+          "path": { "field": "path" },
+          "strokeWidth": { "signal": "pow(datum.value, 1.1)" },  
+          "tooltip": { "signal": "'Source: ' + datum.source + ', Target: ' + datum.target + ', Value: ' + datum.value" }
+        }
+      }
+    }
+  ]
+}
