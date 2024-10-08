@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Import Vega & Vega-Lite -->
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> What Does Australia Look Like? </title>
+    <style>
+        /* Style for body */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        /* Header box style */
+        #header-box {
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d3d3d3;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        /* Container for main content */
+        .row-container {
+            display: flex;
+            flex-direction: row;
+            width: 95%;
+            margin: 20px auto;
+            gap: 20px;
+        }
+
+        /* Left content block */
+        .left-block {
+            flex: 3;
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        /* Right content block */
+        .right-block {
+            flex: 1; /* Adjusted to make it smaller */
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        /* Center box */
+        .center-box {
+            flex: 2; /* Dynamic width for center box */
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 0 10px; /* Space between boxes */
+        }
+
+        /* Ensure the stacked-area div scales */
+        #stacked-area {
+            width: 100%; /* Ensure the graph fills the parent container */
+            height: auto; /* Height is auto-adjusted */
+        }
+
+        /* Maps container to hold two maps side by side */
+        .maps-container {
+            display: flex;
+            gap: 20px; /* Space between the two maps */
+        }
+
+        /* Individual map styling */
+        .map {
+            flex: 1; /* Make each map take equal space */
+            border: 2px solid black; /* Add black border to each map */
+            background-color: #cce5ff; /* Add the background color */
+        }
+
+        /* Responsive text sizes */
+        p {
+            font-size: 16px; /* Maintain readability */
+        }
+
+        /* New row with three boxes (40-20-40 layout) */
+        .new-row {
+            display: flex;
+            justify-content: space-between;
+            width: 95%; /* Same width as other rows */
+            margin: 30px auto; /* Centering with margins */
+            height: 730px; /* Set height for the entire row */
+        }
+
+        .left-box {
+            flex: 4; /* 40% width */
+            background-color: #ffffff;
+            padding: 0; /* Remove padding to make flush */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%; /* Fill the entire height of the row */
+            display: flex; /* Use flexbox for centering */
+            align-items: center; /* Center vertically */
+            justify-content: center; /* Center horizontally */
+            flex-direction: column; /* Stack items vertically */
+        }
+
+        .center-box {
+            flex: 2; /* 20% width */
+            background-color: #ffffff;
+            padding: 0; /* Remove padding to make flush */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%; /* Fill the entire height of the row */
+        }
+
+        .right-box {
+            flex: 4; /* 40% width */
+            background-color: #ffffff;
+            padding: 0; /* Remove padding to make flush */
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%; /* Fill the entire height of the row */
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack items vertically */
+            align-items: center; /* Center vertically */
+            justify-content: flex-start; /* Align items to the top */
+        }
+
+        .right-box h2 {
+            margin: 10px 0; /* Space around the title */
+            font-size: 20px; /* Title size */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header Box -->
+    <div id="header-box">
+        What Does Australia Look Like 
+    </div>
+
+    <!-- Main Content Container (First Row) -->
+    <div class="row-container">
+        <!-- Left Block (75% Width) -->
+        <div class="left-block">
+            <p>Our Imports and Exports</p>
+            
+            <!-- Stacked Area Chart Visualization -->
+            <div id="stacked-area"></div>
+            <script>
+                // Embed the Vega-Lite specification from an external JSON file
+                vegaEmbed('#stacked-area', 'js/stacked.area.merged.detail1.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": "container",
+                    "config": {
+                        "legend": {
+                            "orient": "right",
+                            "direction": "vertical"
+                        }
+                    }
+                }).then(function(result) {
+                    // Access the Vega view instance as result.view
+                }).catch(console.error);
+            </script>
+        </div>
+
+        <!-- Right Block (25% Width) -->
+        <div class="right-block">
+            <p>Economics Storytelling</p>
+        </div>
+    </div>
+
+    <!-- Second Row (New Boxes) -->
+    <div class="row-container">
+        <!-- Left Block (75% Width) with maps -->
+        <div class="left-block">
+            <div class="maps-container">
+                <!-- First Map -->
+                <div id="modimap1" class="map"></div>
+                <script>
+                    vegaEmbed('#modimap1', 'js/modimap.vg.json').then(function(result) {
+                        // Access the Vega view instance as result.view
+                    }).catch(console.error);
+                </script>
+
+                <!-- Second Map -->
+                <div id="modimap2" class="map"></div>
+                <script>
+                    vegaEmbed('#modimap2', 'js/modimap2.vg.json').then(function(result) {
+                        // Access the Vega view instance as result.view
+                    }).catch(console.error);
+                </script>
+            </div>
+        </div>
+
+        <!-- Right Block (25% Width) -->
+        <div class="right-block">
+            <p> Migration Storytelling</p>
+        </div>
+    </div>
+
+    <!-- New Row with Three Boxes (40-20-40 Layout) -->
+    <div class="new-row">
+        <div class="right-box"> <!-- Swapped Content -->
+            <h2>Major Australia Two-Way Trade Partners</h2>
+            <div id="alluvial-diagram" style="width: 600px; height: 600px;"></div>
+            <script>
+                // Embed the Vega-Lite specification for the alluvial diagram
+                vegaEmbed('#alluvial-diagram', 'js/testalluvial.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": 600,  // Fixed width
+                    "height": 600   // Fixed height
+                }).then(function(result) {
+                    // Access the Vega view instance as result.view
+                }).catch(console.error);
+            </script>
+        </div>
+        <div class="center-box"></div>
+        <div class="left-box"> <!-- Swapped Content -->
+            <h2>Population Overview</h2> <!-- Title Added Above Population Graph -->
+            <div id="stacked-bar" style="width: 100%; height: 100%;"></div>
+            <script>
+                // Embed the Vega-Lite specification for the stacked bar chart
+                vegaEmbed('#stacked-bar', 'js/stacked.bar.multiple.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": 600,  // Fixed width
+                    "height": 600   // Fixed height
+                }).then(function(result) {
+                    // Access the Vega view instance as result.view
+                }).catch(console.error);
+            </script>
+        </div>
+    </div>
+</body>
+</html>
