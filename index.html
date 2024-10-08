@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://cdn.jsdelivr.net/npm/vega@5.22.1"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.5.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.21.0"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> What Does Australia Look Like? </title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+        }
+
+        #header-box {
+            width: 95%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #d3d3d3;
+            border-radius: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .row-container {
+            display: flex;
+            flex-direction: row;
+            width: 95%;
+            margin: 20px auto;
+            gap: 20px;
+        }
+
+        .left-block {
+            flex: 3;
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .right-block {
+            flex: 1;
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+
+        .center-box {
+            flex: 2;
+            background-color: #ffffff;
+            padding: 20px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            margin: 0 10px;
+        }
+
+        #stacked-area {
+            width: 100%;
+            height: auto;
+        }
+
+        .maps-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .map {
+            flex: 1;
+            border: 2px solid black;
+            background-color: #cce5ff;
+        }
+
+        p {
+            font-size: 16px;
+        }
+
+        .new-row {
+            display: flex;
+            justify-content: space-between;
+            width: 95%;
+            margin: 30px auto;
+            height: 730px;
+        }
+
+        .left-box {
+            flex: 4;
+            background-color: #ffffff;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+
+        .center-box {
+            flex: 2;
+            background-color: #ffffff;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%;
+        }
+
+        .right-box {
+            flex: 4;
+            background-color: #ffffff;
+            padding: 0;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        .right-box h2 {
+            margin: 10px 0;
+            font-size: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header-box">
+        What Does Australia Look Like 
+    </div>
+
+    <div class="row-container">
+        <div class="left-block">
+            <p>Our Imports and Exports</p>
+            <div id="stacked-area"></div>
+            <script>
+                vegaEmbed('#stacked-area', 'js/stacked.area.merged.detail1.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": "container",
+                    "config": {
+                        "legend": {
+                            "orient": "right",
+                            "direction": "vertical"
+                        }
+                    }
+                }).then(function(result) {
+                }).catch(console.error);
+            </script>
+        </div>
+        <div class="right-block">
+            <p>Economics Storytelling</p>
+        </div>
+    </div>
+
+    <div class="row-container">
+        <div class="left-block">
+            <div class="maps-container">
+                <div id="modimap1" class="map"></div>
+                <script>
+                    vegaEmbed('#modimap1', 'js/modimap.vg.json').then(function(result) {
+                    }).catch(console.error);
+                </script>
+                <div id="modimap2" class="map"></div>
+                <script>
+                    vegaEmbed('#modimap2', 'js/modimap2.vg.json').then(function(result) {
+                    }).catch(console.error);
+                </script>
+            </div>
+        </div>
+        <div class="right-block">
+            <p> Migration Storytelling</p>
+        </div>
+    </div>
+
+    <div class="new-row">
+        <div class="right-box">
+            <h2>Major Australia Two-Way Trade Partners</h2>
+            <div id="alluvial-diagram" style="width: 600px; height: 600px;"></div>
+            <script>
+                vegaEmbed('#alluvial-diagram', 'js/testalluvial.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": 600,
+                    "height": 600
+                }).then(function(result) {
+                }).catch(console.error);
+            </script>
+        </div>
+        <div class="center-box"></div>
+        <div class="left-box">
+            <h2>Population Overview</h2>
+            <div id="stacked-bar" style="width: 100%; height: 100%;"></div>
+            <script>
+                vegaEmbed('#stacked-bar', 'js/stacked.bar.multiple.vg.json', {
+                    "autosize": {"type": "fit", "contains": "padding"},
+                    "width": 600,
+                    "height": 600
+                }).then(function(result) {
+                }).catch(console.error);
+            </script>
+        </div>
+    </div>
+</body>
+</html>
