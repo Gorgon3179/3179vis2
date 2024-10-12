@@ -1,0 +1,8 @@
+source,target,value_2021,value_2022,sourceStartAngle,sourceEndAngle,targetStartAngle,targetEndAngle
+Australia,China,266962,316874,0,0.785,0.785,1.571
+Australia,Japan,66987,143369,0,0.785,1.571,2.356
+Australia,United States,67783,94628,0,0.785,2.356,3.142
+Australia,Republic of Korea,39444,77582,0,0.785,3.142,3.927
+Australia,India,27069,44970,0,0.785,3.927,4.712
+Australia,Singapore,28575,50891,0,0.785,4.712,5.498
+Australia,New Zealand,23652,34305,0,0.785,5.498,6.283

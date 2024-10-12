@@ -1,0 +1,9 @@
+category,startAngle,endAngle,value,color
+Australia,0.0,0.785,316874,#d62728
+China,0.785,1.571,316874,#1f77b4
+Japan,1.571,2.356,143369,#ff7f0e
+United States,2.356,3.142,94628,#2ca02c
+Republic of Korea,3.142,3.927,77582,#d62728
+India,3.927,4.712,44970,#9467bd
+Singapore,4.712,5.498,50891,#8c564b
+New Zealand,5.498,6.283,34305,#e377c2
