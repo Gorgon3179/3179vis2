@@ -1,0 +1,16 @@
+source,target,value_2020_21,value_2021_22,value_2022_23,sourceStartAngle,sourceEndAngle,targetStartAngle,targetEndAngle
+Australia,China,266962,283440,316874,0,0.418,0.418,0.836
+Australia,Japan,66987,117293,143369,0,0.418,0.836,1.254
+Australia,United States,67783,76437,94628,0,0.418,1.254,1.672
+Australia,Republic of Korea,39444,68600,77582,0,0.418,1.672,2.09
+Australia,Singapore,28575,46542,50891,0,0.418,2.09,2.508
+Australia,India,27069,46454,44970,0,0.418,2.508,2.926
+Australia,Taiwan,17111,33949,41504,0,0.418,2.926,3.344
+Australia,Malaysia,21154,26795,35252,0,0.418,3.344,3.762
+Australia,New Zealand,23652,25527,34305,0,0.418,3.762,4.18
+Australia,Thailand,20868,24597,30848,0,0.418,4.18,4.598
+Australia,Germany,22166,26376,28870,0,0.418,4.598,5.016
+Australia,United Kingdom,28782,22160,28705,0,0.418,5.016,5.434
+Australia,Indonesia,14139,18373,26237,0,0.418,5.434,5.852
+Australia,Vietnam,15807,22049,25658,0,0.418,5.852,6.27
+Australia,Hong Kong (SAR of China),11155,13981,13521,0,0.418,6.27,6.688
